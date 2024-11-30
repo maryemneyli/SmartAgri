@@ -1,0 +1,52 @@
+/* Container */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6F8F72;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.navbar-item {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.navbar-item:hover {
+  background-color: #4D774E;
+}
+
+.btn-login {
+  background-color: #ffffff;
+  color: #6F8F72;
+  font-weight: bold;
+}
+
+.btn-login:hover {
+  background-color: #4D774E;
+}
+
+.btn-logout {
+  background-color: #D9534F;
+}
+
+.btn-logout:hover {
+  background-color: #C9302C;
+}

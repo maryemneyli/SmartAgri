@@ -1,0 +1,40 @@
+<div class="admin">
+  <a routerLink="/admin" class="navbar-item">Sensors</a>
+  <a routerLink="/administrator" class="navbar-item">Users</a>
+</div>
+
+<div class="administrator-container">
+  <h2>User List</h2>
+  <table class="user-table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users" (click)="getOneUser(user._id)">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>
+        <button (click)="editUser(user)" class="btn btn-edit">Edit</button>
+        <button *ngIf="user.role == 'user' " (click)="makeAdmin(user._id)" class="btn btn-make-admin">Make Admin</button>
+        <button *ngIf="user.role == 'admin' " (click)="makeUser(user._id)" class="btn btn-make-admin">Make User</button>
+        <button (click)="deleteUser(user._id)" class="btn btn-delete">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Selected user details -->
+  <div *ngIf="selectedUser" class="user-details-box">
+    <h2>User Details</h2>
+    <p><strong>Name:</strong> {{ selectedUser.name }}</p>
+    <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+    <p><strong>Role:</strong> {{ selectedUser.role || 'User' }}</p>
+    <button (click)="clearSelectedUser()" class="btn btn-close">Close</button>
+  </div>
+</div>

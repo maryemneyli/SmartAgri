@@ -1,0 +1,71 @@
+/* Styles communs pour les conteneurs de login et signup */
+.signup-container {
+  background-color: #F4F4F9; /* Fond léger pour le contraste */
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombrage subtil */
+}
+
+h2 {
+  text-align: center;
+  color: #4D774E; /* Vert du thème */
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input:focus {
+  border-color: #4D774E; /* Bordure verte au focus */
+  outline: none;
+}
+
+button {
+  padding: 1rem;
+  background-color: #4D774E; /* Vert du thème */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3a5c3a; /* Vert plus foncé au survol */
+}
+
+p {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Styles pour ajuster l'espace autour des formulaires */
+.signup-container {
+  margin-bottom: 2rem;
+}

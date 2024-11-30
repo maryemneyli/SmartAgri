@@ -1,0 +1,18 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/home" class="navbar-item brand-logo">SmartAgri</a>
+    </div>
+    <div class="navbar-menu">
+      <a routerLink="/dashboard" class="navbar-item">Dashboard</a>
+      <a *ngIf="isAdminOrSuperAdmin" routerLink="/admin" class="navbar-item">Admin Panel</a>
+      <a routerLink="/requests" class="navbar-item">Requests</a>
+    </div>
+    <div class="navbar-end">
+      <a *ngIf="!isAuthenticated" routerLink="/signup" class="navbar-item">Sign Up</a>
+      <a *ngIf="!isAuthenticated" routerLink="/login" class="navbar-item btn-login">Login</a>
+      <a *ngIf="isAuthenticated" href="#" class="btn-logout" (click)="logout()">Logout</a>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

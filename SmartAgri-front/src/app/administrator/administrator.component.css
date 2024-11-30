@@ -1,0 +1,161 @@
+.admin {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #E7F6E1; /* Vert clair */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #4D774E; /* Vert sombre */
+  margin-bottom: 20px;
+}
+
+/* Liens pour la navigation entre capteurs et utilisateurs */
+.navbar-item {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #6F8F72;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.navbar-item:hover {
+  background-color: #4D774E;
+}
+
+/* Table de capteurs */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+
+thead {
+  background-color: #6F8F72;
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #F0FFF0; /* Doux vert pour survol */
+}
+
+/* Boutons d'action */
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.btn-open {
+  background-color: #59C36A;
+}
+
+.btn-open:hover {
+  background-color: #4D774E;
+}
+
+.btn-close {
+  background-color: #D9534F;
+}
+
+.btn-close:hover {
+  background-color: #C9302C;
+}
+
+/* Formulaire pour l'ajout ou la modification de capteurs */
+form {
+  margin-top: 20px;
+  background-color: #F0FFF0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #4D774E;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #6F8F72;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+form button:hover {
+  background-color: #4D774E;
+}
+
+button.cancel {
+  background-color: #D9534F;
+}
+
+button.cancel:hover {
+  background-color: #C9302C;
+}
+
+/* Boutons de type capteur/actionneur */
+button.selected {
+  background-color: #4D774E;
+  color: white;
+}
+/* Box pour les détails utilisateur */
+.user-details-box {
+  background-color: #F0FFF0; /* Vert doux pour correspondre au thème */
+  border: 1px solid #6F8F72; /* Bordure verte */
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-details-box h3 {
+  color: #4D774E; /* Vert sombre */
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.user-details-box p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #4D774E; /* Vert sombre pour le texte */
+}
+
+.user-details-box strong {
+  color: #6F8F72; /* Teinte plus vive pour mettre en évidence */
+}
+
+

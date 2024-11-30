@@ -1,0 +1,77 @@
+<table>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Sensor Name</th>
+    <th>Type</th>
+    <th>Location</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let request of requests">
+    <td>{{ request.username }}</td>
+    <td>{{ request.name }}</td>
+    <td>{{ request.type }}</td>
+    <td>{{ request.location }}</td>
+    <td>{{ request.status }}</td>
+    <td>
+      <button *ngIf="request.status == 'pending'" (click)="updateRequest(request)">Update</button>
+      <button (click)="deleteRequest(request._id)">Delete</button>
+      <button *ngIf="isAdmin" (click)="updateRequestStatus(request, 'approved')">Approve</button>
+      <button *ngIf="isAdmin" (click)="updateRequestStatus(request, 'rejected')">Reject</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="showRequestForm" class="sensor-form">
+  <h2>Add Sensor</h2>
+  <form (ngSubmit)="submitRequest()">
+    <div>
+      <label for="user">Assign to User</label>
+      <select id="user" [(ngModel)]="sensorForm.userId" name="userId" required>
+        <option *ngFor="let user of users" [value]="user._id">{{ user.name }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="name">Name</label>
+      <input id="name" [(ngModel)]="sensorForm.name" name="name" required />
+    </div>
+    <div>
+      <label for="type">Type</label>
+      <input id="type" [(ngModel)]="sensorForm.type" name="type" required />
+    </div>
+    <div>
+      <label for="location">Location</label>
+      <input id="location" [(ngModel)]="sensorForm.location" name="location" required />
+    </div>
+    <div>
+      <label for="bd">BD</label>
+      <input id="bd" [(ngModel)]="sensorForm.bd" name="bd" required />
+    </div>
+    <button type="submit">Save Sensor</button>
+    <button type="button" (click)="resetForm()">Cancel</button>
+  </form>
+</div>
+
+<div *ngIf="showUpdateForm" class="update-form">
+  <h2>Update Request</h2>
+  <form (ngSubmit)="submitUpdate()">
+    <div>
+      <label for="name">Name</label>
+      <input id="Uname" [(ngModel)]="updateForm.name" name="name" required />
+    </div>
+    <div>
+      <label for="type">Type</label>
+      <input id="Utype" [(ngModel)]="updateForm.type" name="type" required />
+    </div>
+    <div>
+      <label for="location">Location</label>
+      <input id="Ulocation" [(ngModel)]="updateForm.location" name="location" required />
+    </div>
+    <button type="submit">Save Changes</button>
+    <button type="button" (click)="cancelUpdate()">Cancel</button>
+  </form>
+</div>

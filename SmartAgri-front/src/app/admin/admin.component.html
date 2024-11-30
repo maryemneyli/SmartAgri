@@ -1,0 +1,72 @@
+<div class="admin">
+  <a routerLink="/admin" class="navbar-item">Sensors</a>
+  <a routerLink="/administrator" class="navbar-item">Users</a>
+</div>
+
+<div>
+  <h2>Sensor List</h2>
+  <button (click)="showAddSensorForm()">Add Sensor</button>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let sensor of sensors">
+      <td>{{ sensor.name }}</td>
+      <td>{{ sensor.type }}</td>
+      <td>{{ sensor.location }}</td>
+      <td>{{ sensor.status ? 'Active' : 'Inactive' }}</td>
+      <td>
+        <button (click)="editSensor(sensor)">Edit</button>
+        <button (click)="deleteSensor(sensor)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="isFormVisible">
+  <h2>{{ sensorForm._id ? 'Update Sensor' : 'Add Sensor' }}</h2>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Choisir entre Capteur ou Actionneur -->
+    <div>
+      <label>Type</label>
+      <div>
+        <button type="button" (click)="selectSensorType('Sensor')" [class.selected]="sensorForm.type === 'Sensor'">Sensor</button>
+        <button type="button" (click)="selectSensorType('Actuator')" [class.selected]="sensorForm.type === 'Actuator'">Actuator</button>
+      </div>
+    </div>
+
+    <!-- Sélectionner l'utilisateur -->
+    <div>
+      <label for="user">Assign to User</label>
+      <select id="user" [(ngModel)]="sensorForm.userId" name="userId" required>
+        <option *ngFor="let user of users" [value]="user._id">{{ user.name }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="bd">BD</label>
+      <input id="bd" [(ngModel)]="sensorForm.bd" name="bd" required />
+    </div>
+
+    <div>
+      <label for="name">Name</label>
+      <input id="name" [(ngModel)]="sensorForm.name" name="name" required />
+    </div>
+
+    <div>
+      <label for="location">Location</label>
+      <input id="location" [(ngModel)]="sensorForm.location" name="location" required />
+    </div>
+
+    <button type="submit">{{ sensorForm._id ? 'Update Sensor' : 'Add Sensor' }}</button>
+    <button type="button" (click)="hideForm()">Cancel</button>
+  </form>
+</div>

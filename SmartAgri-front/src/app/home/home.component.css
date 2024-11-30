@@ -1,0 +1,17 @@
+.home-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.actions .button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #6F8F72;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.actions .button:hover {
+  background-color: #4D774E;
+}

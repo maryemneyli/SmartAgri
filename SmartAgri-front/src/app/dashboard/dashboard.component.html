@@ -1,0 +1,125 @@
+<div class="dashboard">
+  <h2>Dashboard</h2>
+
+  <!-- Section pour les capteurs -->
+  <h3>Sensors</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Database</th>
+      <th>Location</th>
+      <th>Anomalies</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let sensor of sensors">
+      <tr *ngIf="sensor.type === 'Sensor'" (click)="selectSensor(sensor._id)">
+        <td>{{ sensor.name }}</td>
+        <td>{{ sensor.bd }}</td>
+        <td>{{ sensor.location }}</td>
+        <td>
+          <div *ngIf="hasAnomaly(sensor._id)" class="anomaly-alert">
+            <span>Attention : Anomalie détectée !</span>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+  <!-- Section pour afficher les données détaillées d'un capteur sélectionné -->
+  <div *ngIf="selectedSensorId">
+    <h3>Sensor Data for {{ getSensorName(selectedSensorId) }}</h3>
+
+    <!-- Si des données sont disponibles -->
+    <table *ngIf="sensorData[selectedSensorId]?.length; else noData">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Temperature</th>
+        <th>Soil Humidity</th>
+        <th>Light Intensity</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let data of sensorData[selectedSensorId]; let i = index"
+        [ngClass]="{ 'anomaly-row': anomalies[selectedSensorId][i].isAnomalous }"
+      >
+        <td>{{ data.timestamp | date: 'short' }}</td>
+        <td>{{ data.temperature }}°C</td>
+        <td>{{ data.humidity }}%</td>
+        <td>{{ data.light }} lx</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Message s'il n'y a pas de données -->
+    <ng-template #noData>
+      <p>No data available for this sensor.</p>
+    </ng-template>
+  </div>
+
+  <!-- Section pour les actionneurs -->
+  <h3>Actuators</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Actuator</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let actuator of sensors">
+      <tr *ngIf="actuator.type === 'Actuator'">
+        <td>{{ actuator.name }}</td>
+        <td class="{{ actuator.status ? 'open-status' : 'closed-status' }}">
+          {{ actuator.status ? 'Open' : 'Closed' }}
+        </td>
+        <td>
+          <button
+            class="btn-open"
+            (click)="togglePump(actuator._id, true)"
+            [disabled]="actuator.status"
+          >
+            Open
+          </button>
+          <button
+            class="btn-close"
+            (click)="togglePump(actuator._id, false)"
+            [disabled]="!actuator.status"
+          >
+            Close
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+  <!-- Bouton pour afficher le formulaire -->
+  <button class="btn-add-request" (click)="toggleRequestForm()">+ Add Sensor Request</button>
+
+  <!-- Formulaire d'ajout de demande de capteur -->
+  <div *ngIf="showRequestForm" class="sensor-request-form">
+    <h3>Add Sensor Request</h3>
+    <form (ngSubmit)="submitRequest()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="newRequest.name" name="name" required />
+
+      <label for="type">Type:</label>
+      <select id="type" [(ngModel)]="newRequest.type" name="type" required>
+        <option value="Sensor">Sensor</option>
+        <option value="Actuator">Actuator</option>
+      </select>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" [(ngModel)]="newRequest.location" name="location" required />
+
+      <button type="submit" class="btn-submit">Submit Request</button>
+      <button type="button" class="btn-cancel" (click)="toggleRequestForm()">Cancel</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,193 @@
+.dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #E7F6E1; /* Vert clair pour refléter l'agriculture */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  text-align: center;
+  color: #4D774E; /* Vert sombre */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead {
+  background-color: #6F8F72; /* Teinte verte pour l'agriculture */
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #F0FFF0; /* Doux vert pour survol */
+}
+
+/* Boutons */
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-open {
+  background-color: #59C36A;
+}
+
+.btn-open:hover {
+  background-color: #4D774E;
+}
+
+.btn-close {
+  background-color: #D9534F;
+}
+
+.btn-close:hover {
+  background-color: #C9302C;
+}
+.anomaly {
+  color: red;
+  font-weight: bold;
+}
+.anomaly-alert {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  background-color: #fdd;
+  padding: 10px;
+  border: 1px solid red;
+}
+.anomaly-alert {
+  color: red;
+  font-weight: bold;
+}
+
+.anomaly-row {
+  background-color: #ffcccc; /* Couleur de fond pour les lignes avec anomalies */
+}
+
+/* Section Dashboard */
+.dashboard {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #E7F6E1; /* Vert clair */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  text-align: center;
+  color: #4D774E; /* Vert sombre */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead {
+  background-color: #6F8F72; /* Teinte verte */
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #F0FFF0; /* Vert doux pour le survol */
+}
+
+/* Boutons */
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-request {
+  background-color: #6F8F72;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-add-request:hover {
+  background-color: #4D774E;
+}
+
+.btn-submit {
+  background-color: #59C36A;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: #4D774E;
+}
+
+.btn-cancel {
+  background-color: #D9534F;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #C9302C;
+}
+
+/* Formulaire */
+.sensor-request-form {
+  background-color: #F0FFF0; /* Vert doux */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.sensor-request-form h3 {
+  color: #4D774E; /* Vert sombre */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sensor-request-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #4D774E;
+}
+
+.sensor-request-form input, .sensor-request-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.sensor-request-form input:focus, .sensor-request-form select:focus {
+  border-color: #6F8F72;
+  outline: none;
+  box-shadow: 0 0 5px rgba(111, 143, 114, 0.5);
+}

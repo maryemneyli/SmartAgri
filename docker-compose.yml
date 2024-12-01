@@ -1,22 +1,19 @@
 version: "3.8"
 services:
   frontend:
-    build:
-      context: ./SmartAgri-front
-      dockerfile: Dockerfile
+    image: $DOCKER_USERNAME/smartagri:front-1
     ports:
       - "80:80"
     depends_on:
       - backend
 
   backend:
-    build:
-      context: ./SmartAgri-backend
-      dockerfile: Dockerfile
+    image: $DOCKER_USERNAME/smartagri:back-1
     ports:
       - "3000:3000"
     environment:
       - MONGO_URI=mongodb+srv://admin:admin@cluster0.p5aaq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
 
   nginx:
     image: nginx:latest
@@ -37,9 +34,15 @@ services:
   grafana:
     image: grafana/grafana:latest
     ports:
-      - "3001:3000"
+      - "3001:3000"  # Exposes Grafana on localhost:3001
     volumes:
-      - grafana-data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana  # Persist Grafana data
+    depends_on:
+      - prometheus  # Ensure Prometheus is running before Grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin  # Default Grafana admin username
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # Default Grafana admin password
+      - GF_USERS_ALLOW_SIGN_UP=false  # Disable sign-ups (optional)
 
 volumes:
   grafana-data:

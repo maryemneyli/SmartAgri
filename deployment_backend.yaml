@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartagri-back
+  namespace: ingress-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smartagri-back
+  template:
+    metadata:
+      labels:
+        app: smartagri-back
+    spec:
+      containers:
+      - name: smartagri-back
+        image: maryem1994/smartagri:back-3
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartagri-back
+  namespace: ingress-nginx
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+  selector:
+    app: smartagri-back

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: ingress-nginx
+spec:
+  selector:
+    matchLabels:
+      app: grafana # Ensure this matches the labels in the pod template
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: grafana # These labels must match the selector
+    spec:
+      containers:
+        - image: grafana/grafana
+          name: grafana
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2500Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: data
+      restartPolicy: Always
+      volumes:
+        - emptyDir: {}
+          name: data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: ingress-nginx
+spec:
+  selector:
+    app: grafana # Matches the Deployment labels
+  ports:
+    - port: 3001 # External port for accessing Grafana
+      protocol: TCP
+      targetPort: 3000 # Matches the containerPort in Deployment
+  type: ClusterIP

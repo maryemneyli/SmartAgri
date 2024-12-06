@@ -18,16 +18,16 @@ export class AppComponent implements OnInit {
   title = 'smartagri-frontend';
 
   constructor(private authService: AuthService) {}
-
   ngOnInit(): void {
-    // Vérifiez si l'utilisateur est connecté
-    this.isAuthenticated = this.authService.isLoggedIn();
+    // S'abonner aux changements d'état de connexion
+    this.authService.isAuthenticated$.subscribe((isLoggedIn) => {
+      this.isAuthenticated = isLoggedIn;
+    });
 
-    // Vérifiez le rôle de l'utilisateur
-    if (this.isAuthenticated) {
-      const userRole = this.authService.getUserRole(); // Méthode pour récupérer le rôle
-      this.isAdminOrSuperAdmin = userRole === 'admin' || userRole === 'superadmin';
-    }
+    // S'abonner aux changements de rôle utilisateur
+    this.authService.userRole$.subscribe((role) => {
+      this.isAdminOrSuperAdmin = role === 'admin' || role === 'superadmin';
+    });
   }
 
   logout(): void {

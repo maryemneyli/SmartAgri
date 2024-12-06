@@ -5,13 +5,14 @@ import { Sensor } from '../models/sensor.model';
 import {User} from "../models/user.model";
 import {SensorData} from "../models/sensor-data.model";
 import {SensorRequest} from "../models/request.model";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SensorService {
-  private sensorsUrl = '/api/sensors';
-  private requestsUrl = '/api/sensor-requests';
+  private sensorsUrl = `${environment.apiUrl}/sensors`;
+  private requestsUrl = `${environment.apiUrl}/sensor-requests`;
 
   constructor(private http: HttpClient) {}
 

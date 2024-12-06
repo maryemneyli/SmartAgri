@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import {User} from "../models/user.model";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
   private jwtHelper = new JwtHelperService();
+  // Subjects pour l'état de connexion et le rôle
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
+  private userRoleSubject = new BehaviorSubject<string | null>(this.getUserRole());
+  userRole$ = this.userRoleSubject.asObservable();
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((response: any) => {
         localStorage.setItem('token', response.token);
+        this.isAuthenticatedSubject.next(true);
+        this.userRoleSubject.next(this.getUserRole());
       })
     );
   }
@@ -32,6 +40,11 @@ export class AuthService {
   }
   logout(): void {
     localStorage.removeItem('token');
+    this.isAuthenticatedSubject.next(true);
+    this.userRoleSubject.next(this.getUserRole());
+    this.isAuthenticatedSubject.next(false);
+    this.userRoleSubject.next(null);
+
     this.router.navigate(['/login']);
   }
 

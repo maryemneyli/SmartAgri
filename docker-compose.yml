@@ -1,48 +1,17 @@
 version: "3.8"
 services:
   frontend:
-    image: $DOCKER_USERNAME/smartagri:front-1
+    image: maryem1994/smartagri:front-1
     ports:
-      - "80:80"
+      - "8081:80"
     depends_on:
       - backend
 
   backend:
-    image: $DOCKER_USERNAME/smartagri:back-1
+    image: maryem1994/smartagri:back-1
     ports:
       - "3000:3000"
     environment:
+      - JWT_SECRET="1234567"
+      - JWT_EXPIRES=1h
       - MONGO_URI=mongodb+srv://admin:admin@cluster0.p5aaq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
-
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "8080:80"
-    depends_on:
-      - frontend
-
-  prometheus:
-    image: prom/prometheus:latest
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "3001:3000"  # Exposes Grafana on localhost:3001
-    volumes:
-      - grafana-data:/var/lib/grafana  # Persist Grafana data
-    depends_on:
-      - prometheus  # Ensure Prometheus is running before Grafana
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin  # Default Grafana admin username
-      - GF_SECURITY_ADMIN_PASSWORD=admin  # Default Grafana admin password
-      - GF_USERS_ALLOW_SIGN_UP=false  # Disable sign-ups (optional)
-
-volumes:
-  grafana-data:
